@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    qoute
+{% endblock %}
+
+{% block main %}
+    <h4>Enter the Stock Symbol you are interested in</h4>
+    <br>
+    <form action="/quote" method="post">
+        <div class="mb-3">
+            <input autocomplete="off" autofocus class="form-control mx-auto w-auto" name="symbol" placeholder="Stock Symbol" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Look up</button>
+    </form>
+{% endblock %}

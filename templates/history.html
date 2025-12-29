@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    history
+{% endblock %}
+
+{% block main %}
+
+    {% if user_transaction %}
+    <h4>Heres Your Trading History</h4>
+    <br>
+        <table class="table table-bordered table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Symbol</th>
+                    <th>Action</th>
+                    <th>Shares</th>
+                    <th>Price Per Share</th>
+                    <th>Total Value</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in user_transaction %}
+                <tr>
+                    <td>{{ row.symbol }}</td>
+
+                    {% if row.shares > 0 %}
+                        <td class="text-success">BUY</td>
+                    {% else %}
+                        <td class="text-danger">SELL</td>
+                    {% endif %}
+
+                    <td>{{ row.shares | abs }}</td>
+                    <td>{{ row.price | usd }}</td>
+                    <td>{{ row.total_value | usd }}</td>
+                    <td>{{ row.timestamp }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h4>You have not bought or sold any stocks yet</h4>
+    {% endif %}
+
+{% endblock %}
+

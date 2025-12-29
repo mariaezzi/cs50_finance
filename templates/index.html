@@ -1,0 +1,74 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    {% if portfolio and cash_balance and grand_total and user_name%}
+
+        <h3>Welcome Back {{user_name}}, Here's Your Portfolio </h3>
+        <div class="container mt-5">
+            <table class="table table-bordered table-hover">
+                <thead class="table-dark">
+                <tr>
+                    <th>Stock Symbol</th>
+                    <th>Company Name</th>
+                    <th>Shares Owned</th>
+                    <th>Current Price</th>
+                    <th>Holding Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for holding in portfolio %}
+                    <tr>
+                        <td> {{holding["symbol"]}} </td>
+                        <td> {{holding["stock_name"]}} </td>
+                        <td> {{holding["total_shares"]}} </td>
+                        <td> {{holding["current_price"] | usd }} </td>
+                        <td> {{holding["holding_value"] | usd }} </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <br>
+
+        <div class="container mt-5">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Current Cash Balance</th>
+                <th>Grand Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ cash_balance | usd }}</td>
+                <td>{{ grand_total | usd }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+
+
+    {% else %}
+        <h4>You currently do not have any holdings</h4>
+                <div class="container mt-5">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Current Cash Balance</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{ cash_balance | usd }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    {% endif %}
+{% endblock %}
+

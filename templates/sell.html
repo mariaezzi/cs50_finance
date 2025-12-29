@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    sell
+{% endblock %}
+
+{% block main %}
+
+    {% if current_holdings %}
+        <form action="/sell" method="post">
+            <h4>Select the symbol of the stock that you wish to sell</h4>
+            <br>
+            <select class="form-select" name="symbol" required>
+                <option disabled hidden selected value="">Open this symbol select menu</option>
+                {% for holding in current_holdings %}
+                    <option value="{{ holding.symbol }}">{{ holding.symbol }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <h4>Enter the number of shares you wish to sell</h4>
+            <br>
+            <div class="mb-3">
+                <input autocomplete="off" class="form-control mx-auto w-auto" name="shares" placeholder="eg. 10" type="text">
+            </div>
+
+            <button class="btn btn-primary" type="submit">sell</button>
+        </form>
+    {% else %}
+        <h4>You currently do not have any holdings to sell</h4>
+    {% endif %}
+
+{% endblock %}

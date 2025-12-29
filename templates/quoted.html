@@ -1,0 +1,31 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    qouted
+{% endblock %}
+
+{% block main %}
+    {% if stock_info %}
+        <div class="container mt-5">
+        <table class="table table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>Stock Symbol</th>
+                <th>Company Name</th>
+                <th>Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>{{stock_info.symbol}}</td>
+                <td>{{stock_info.name}}</td>
+                <td>{{ stock_info.price | usd }}</td>
+            </tr>
+            </tbody>
+        </table>
+        </div>
+    {% else %}
+        <h4>Your requested quote couldnt be found :( </h4>
+    {% endif %}
+
+{% endblock %}
